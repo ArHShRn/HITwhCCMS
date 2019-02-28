@@ -1,0 +1,22 @@
+# 功能性脑洞 Functionality
+1. 创建String资源，实现每次登陆时欢迎信息的不同
+2. 创建String资源，实现Localization
+
+3. 利用爬虫获取最近最新资讯显示到登陆界面
+
+4. 登陆后的用户主界面要做成可以关闭的TAB的形式
+
+5. 分级权限制度（配合SQL查询来赋予权限）
+
+6. 创建一个功能齐全的Logger
+
+7. 登陆界面右上角“更多选项”（找回密码
+
+8. 添加“公告 Announcement”功能
+
+9.将ARConsole转换成日志log记录，并在出现致命错误之后询问用户是否打开日志记录
+
+10.密码不能包含任何特殊字符
+
+# 待完成 Still-Pending
+- public Object RetrieveStudentInfo(DataFormat dataFormat)

@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArLib.Console</name>
+    </assembly>
+    <members>
+        <member name="T:ArLib.Console.CuiConsole">
+            <summary>
+            A helper class to create a console.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.AllocConsole">
+            <summary>
+            [WINDOWS API] ALLOCATE A CONSOLE
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.FreeConsole">
+            <summary>
+            [WINDOWS API] RELEASE CREATED CONSOLE
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.GetStdHandle(System.Int32)">
+            <summary>
+            [WINDOWS API] GET A HANDLE FROM A STANDARD DEVICE
+            (INPUT, OUTPUT, ERROR STREAM)
+            </summary>
+            <param name="nStdHandle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.SetStdHandle(System.Int32,System.IntPtr)">
+            <summary>
+            [WINDOWS API] SET A HANDLE TO A STANDARD DEVICE
+            (OUTPUT STREAM)
+            </summary>
+            <param name="nStdHandle"></param>
+            <param name="hConsoleOutput"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.CreateFile(System.String,System.Int32,System.Int32,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            [WINDOWS API] CREATE OR OPEN A FILE OR A DEVICE.
+            </summary>
+            <param name="fileName"></param>
+            <param name="desiredAccess"></param>
+            <param name="shareMode"></param>
+            <param name="securityAttributes"></param>
+            <param name="creationDisposition"></param>
+            <param name="flagsAndAttributes"></param>
+            <param name="templateFile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.CloseHandle(System.IntPtr)">
+            <summary>
+            [WINDOWS API] CLOSE A HANDLE
+            (FILES, FILE MAPPINGS, THREADS ETC.)
+            </summary>
+            <param name="handle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.CreateConsole(System.String)">
+            <summary>
+            Create current thread a console window.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.ReleaseConsole">
+            <summary>
+            Release the console created before.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.CuiConsole.StreamToConsole">
+            <summary>
+            Redirect the stream to console created before.
+            </summary>
+        </member>
+        <member name="T:ArLib.Console.GuiConsole">
+            <summary>
+            A GUI style logger.
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.GuiConsole._Prefix">
+            <summary>
+            For get/set usage.
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.GuiConsole._Default_Prefix">
+            <summary>
+            Default prefix of the log.
+            </summary>
+        </member>
+        <member name="P:ArLib.Console.GuiConsole.Prefix">
+            <summary>
+            <para>Prefix of the log.</para>
+            <para>Default prefix is "[Log] "</para>
+            <para>The log message will like</para>
+            <para>[Log] This is a sample log.</para>
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.#ctor(System.String,System.String)">
+            <summary>
+            Construct a GUI logger with a customized title.
+            </summary>
+            <param name="customPrefix">set your willing prefix.</param>
+            <param name="title">The form title you want.</param>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.GuiConsole_Load(System.Object,System.EventArgs)">
+            <summary>
+            Print copyright string on load.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.AddLog(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Add a log into textbox
+            </summary>
+            <param name="msg"></param>
+            <param name="bInnerLog"></param>
+            <param name="bAllowTracing"></param>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.AppenLine(System.String)">
+            <summary>
+            Append a new line into tbLogs.
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.btDispose_Click(System.Object,System.EventArgs)">
+            <summary>
+            Dispose the windows on click.
+            Will have a confirmation.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:ArLib.Console.GuiConsole.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ArLib.Console.GuiConsole.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ArLib.Console.MsgLevel">
+            <summary>
+            <para>Log message levels.</para>
+            <para>This controls the message color.</para>
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.MsgLevel.Default">
+            <summary>
+            White
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.MsgLevel.Redirected">
+            <summary>
+            Cyan
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.MsgLevel.Harmless">
+            <summary>
+            Green
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.MsgLevel.Further">
+            <summary>
+            Yellow
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.MsgLevel.Critical">
+            <summary>
+            Red
+            </summary>
+        </member>
+        <member name="T:ArLib.Console.ARConsole">
+            <summary>
+            The log console class
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.procCMD">
+            <summary>
+            Process of CMD
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.psiCMD">
+            <summary>
+            ProcessStartInfo of CMD
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.bInitedCMD">
+            <summary>
+            <para>Is CMD successfully initialized.</para>
+            <para>
+            Related both to if user wants to create CMD
+            and to if ProcessStartInfo of CMD is successfully initialized.
+            </para> 
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.bHasCuiConsole">
+            <summary>
+            Does current running proc has a cui console?
+            <para>Default: true</para>
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.bGuiConsole">
+            <summary>
+            Is current console created as a GUI console?
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.bGuiDisposed">
+            <summary>
+            Is gui console disposed?
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole._bReleased">
+            <summary>
+            Did user call ReleaseConsole();
+            </summary>
+        </member>
+        <member name="P:ArLib.Console.ARConsole.Released">
+            <summary>
+            Did user call ReleaseConsole();
+            </summary>
+        </member>
+        <member name="P:ArLib.Console.ARConsole.TasksComplete">
+            <summary>
+            Do all Async tasks complete?
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole._Prefix">
+            <summary>
+            For get/set usage.
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole._Default_Prefix">
+            <summary>
+            Default prefix of the log.
+            </summary>
+        </member>
+        <member name="P:ArLib.Console.ARConsole.Prefix">
+            <summary>
+            <para>Prefix of the log.</para>
+            <para>Default prefix is "[Log] "</para>
+            <para>The log message will like
+            [Log] This is a sample log.</para>
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.preErrMsg">
+            <summary>
+            <para>The exception message of errors occured before the console is created.</para>
+            <para>All errors will be logged according to their own occuring time after initialization.</para>
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.guiConsole">
+            <summary>
+            The form style logger
+            </summary>
+        </member>
+        <member name="T:ArLib.Console.ARConsole.CreateGuiConsoleDelegate">
+            <summary>
+            <para>A delegate.</para>
+            <para>Used for async creating Gui console.</para>
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.CreateGuiConsoleCallBack">
+            <summary>
+            A callback that would inform us if Gui console is disposed.
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.CreateGuiConsoleResult">
+            <summary>
+            IAsyncResult of CreateGuiConsoleDelegate's invoke.
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.ARConsole.delegateCreateGuiConsole">
+            <summary>
+            The instance of the function to create a Gui console.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.CreateConsole(System.Boolean,System.String,System.Boolean,System.String)">
+            <summary>
+            <para>Create a logger instance.</para>
+            <para>The user will decide if this instance responds to CMD commands.</para>
+            <para>The user will decide if this instance uses customized prefix.</para>
+            <para>The user will decide if this instance is a GUI console</para>
+            </summary>
+            <param name="bUseCMD">set true to let the instance responds to CMD commands.</param>
+            <param name="customPrefix">set your willing prefix.</param>
+            <param name="bGUI">set true to create GUI console</param>
+            <param name="title">The console title.</param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.ReleaseConsole">
+            <summary>
+            Release created console.
+            If the app has already a console then leave it.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.InitPsiCMD">
+            <summary>
+            Initialize ProcessStartInfo of CMD.
+            Will store a exception msg that occurs before the console is created.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.LogCreatingStatus">
+            <summary>
+            Log all errors that occured before the console is created.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.CreateCuiConsole(System.String)">
+            <summary>
+            Try to create a console for current proc.
+            </summary>
+            <returns>false if current proc has already a console.[Like a console app]</returns>
+        </member>
+        <member name="M:ArLib.Console.ARConsole._CreateGuiConsole(System.String,System.String)">
+            <summary>
+            A method to start a standard message loop of Gui console.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.NotifyGuiConsoleTerminated(System.IAsyncResult)">
+            <summary>
+            Called after the Gui console terminated.
+            </summary>
+            <param name="asyncResult"></param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.NotifyLogCompleteInGuiConsole(System.IAsyncResult)">
+            <summary>
+            Called after the message is logged in the GUI console
+            </summary>
+            <param name="asyncResult"></param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.WriteLine(System.String,ArLib.Console.MsgLevel)">
+            <summary>
+            Make a log to console
+            </summary>
+            <param name="str">Contents to be logged</param>
+            <param name="level">Message level which decides the printing color</param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.InnerLog(System.String,System.String,System.Boolean,ArLib.Console.MsgLevel)">
+            <summary>
+            Only for in-class usage.
+            Make a non-prefix log according to your willing.
+            </summary>
+            <param name="str"></param>
+            <param name="prefix"></param>
+            <param name="bPrefix"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.CRLF">
+            <summary>
+            Start a new line except GUI console.
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.Pause">
+            <summary>
+            Simulate a PAUSE command
+            </summary>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.ExecuteCMD(System.String)">
+            <summary>
+            Sync send a cmd command and get the result.
+            </summary>
+            <param name="command">A non-interactive CMD command</param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.AsyncExecuteCMD(System.String)">
+            <summary>
+            Async send a cmd command and get the result.
+            </summary>
+            <param name="command">A non-interactive CMD command</param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole._AsyncExecuteCMD(System.String)">
+            <summary>
+            Method of AsyncExecuteCMD
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:ArLib.Console.ARConsole.NotifyCommandTerminated(System.IAsyncResult)">
+            <summary>
+            Notify that a async-executed command is terminated.
+            </summary>
+            <param name="asyncResult"></param>
+        </member>
+        <member name="T:ArLib.Console.UserDefinedStr">
+            <summary>
+            Copyrights and licenses
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.UserDefinedStr.sAuthor">
+            <summary>
+            Author and version
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.UserDefinedStr.sHelperCpr">
+            <summary>
+            Console Helper Classs Copyright
+            </summary>
+        </member>
+        <member name="F:ArLib.Console.UserDefinedStr.sLibCpr">
+            <summary>
+            Library Copyright
+            </summary>
+        </member>
+    </members>
+</doc>
