@@ -58,7 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AESKey.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="DataTemplate\DataModels.cs" />
     <Compile Include="DataTemplate\ExceptionMessageTemplate.cs" />
@@ -69,6 +68,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\AESHelper.cs" />
+    <Compile Include="Utils\AESKey.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
