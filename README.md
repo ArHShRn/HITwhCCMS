@@ -15,8 +15,6 @@ This project is still under development, please switch to branch 'dev' to inspec
 - 项目不支持英文语言，并且只提供中文文档。
 - The project doesn't support English and we provide only Chinese docs.
 
-
-
 # 哈尔滨大学（威海）校园卡管理系统
 请注意，软件不提供英文版本。
 
@@ -29,12 +27,8 @@ Please note that the application doesn't support English.
 
 - 客户端以带过渡效果的文字显示出来
 
-  
-
 ### 登陆界面
 ![Image](https://fileshk.arhshrn.cn/github/devprac3/loginwindow.jpg)
-
-
 
 ## 前端预期功能
 
@@ -76,8 +70,6 @@ Please note that the application doesn't support English.
 ### 数据同步
 - 运行时同步（用户在程序中主动发起同步）
 - **定期同步 （定期从校园网获取数据，需要用户授权）**
-
-
 
 ## 脑洞
 
