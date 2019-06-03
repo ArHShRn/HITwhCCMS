@@ -21,16 +21,16 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button x:Name="btAdminLogin" Click="BtAdminLogin_Click" ToolTip="管理员登陆，没事不要乱玩哦~">
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconFontAwesome Width="24" Height="24" Kind="UserPlusSolid" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="管理员登陆" />
-                </StackPanel>
-            </Button>
             <Button x:Name="btMore" Click="BtMore_Click" ToolTip="更多有趣功能等你来发现~">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="DotsHorizontalCircle" />
                     <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="更多功能" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="btAdminLogin" Click="BtAdminLogin_Click" ToolTip="如果有核弹的话，核弹支援一下">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconFontAwesome Width="24" Height="24" Kind="UserPlusSolid" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="找回密码" />
                 </StackPanel>
             </Button>
             <ToggleButton Content="退出时确认" IsChecked="{Binding QuitConfirmationEnabled}" ToolTip="退出时是否弹出确认信息" />
