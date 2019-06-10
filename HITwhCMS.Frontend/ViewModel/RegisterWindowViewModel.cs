@@ -26,7 +26,7 @@ namespace HITwhCMS.Frontend.ViewModel
             private set;
         }
 
-        private string _inputIDNumber = "500101199807310431";
+        private string _inputIDNumber = "";
         public string InputIDNumber
         {
             get

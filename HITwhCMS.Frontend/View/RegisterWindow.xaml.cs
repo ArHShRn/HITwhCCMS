@@ -45,6 +45,10 @@ namespace HITwhCMS.Frontend.View
 
             this.KeyDown += Event_KeyDown;
             this.Loaded += SetInitalFocus;
+
+            Tab0.IsEnabled = false;
+            Tab1.IsEnabled = false;
+            Tab2.IsEnabled = false;
         }
 
         /// <summary>
@@ -187,10 +191,11 @@ namespace HITwhCMS.Frontend.View
             else
             {
                 controller.SetProgress(1.0d);
-                controller.SetTitle("身份验证成功！");
-                controller.SetMessage(tbName.Text + "，下面我们开始下一步操作！");
-                await Task.Delay(3000);
+                //controller.SetTitle("身份验证成功！");
+                //controller.SetMessage(tbName.Text + "，下面我们开始下一步操作！");
+                //await Task.Delay(1000);
                 await controller.CloseAsync();
+                RegisterTabControl.SelectedIndex = 1;
             }
             return;
         }
@@ -218,6 +223,26 @@ namespace HITwhCMS.Frontend.View
         private void SetInitalFocus(object sender, RoutedEventArgs e)
         {
             tbIDNumber.Focus();
+        }
+
+        private void BtPrevious_Tab1_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterTabControl.SelectedIndex -= 1;
+        }
+
+        private void BtNext_Tab1_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterTabControl.SelectedIndex += 1;
+        }
+
+        private void BtPrevious_Tab2_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterTabControl.SelectedIndex -= 1;
+        }
+
+        private void BtNext_Tab2_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
