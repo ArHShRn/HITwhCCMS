@@ -94,7 +94,7 @@ namespace HITwhCMS.Frontend.ViewModel
             }
         }
 
-        private string _inputStudentNumber = "123123123";
+        private string _inputStudentNumber = "160400220";
         public string InputStudentNumber
         {
             get

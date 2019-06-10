@@ -115,9 +115,9 @@ namespace HITwhCMS.Backend.DataTemplate
         /// </summary>
         public static ActivityInfo activityInfo = new ActivityInfo()
         {
-            Website = "www.baidu.com",
-            TitleLevel1 = "AI全面深化 IT放荡前行",
-            TitleLevel2 = "2018中国IT用户满意度大会回眸"
+            Website = "来自 160400219 何凯",
+            TitleLevel1 = "2019年05月29日",
+            TitleLevel2 = "\"我在学子附近捡到一张校园卡，" + Environment.NewLine + "卡号是1604102xx，请尽快联系我！\""
         };
     }
 }

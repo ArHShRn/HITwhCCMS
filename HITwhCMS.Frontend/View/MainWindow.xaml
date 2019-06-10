@@ -47,10 +47,11 @@
             <RowDefinition Height="444*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Left" Margin="0,0,0,-2" VerticalAlignment="Top" Source="../Resources/RegisterBackground.jpg" Stretch="Fill" Grid.RowSpan="2" d:IsHidden="True"/>
         <StatusBar x:Name="Copyright" Grid.Row="1" Background="{DynamicResource AccentColorBrush}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <StatusBarItem x:Name="HITwhCpr" Margin="10,0" Content="Harbin Institute of Technology(Weihai) 哈尔滨工业大学（威海）"/>
             <Separator Style="{StaticResource MetroStatusBarSeparator}" />
-            <StatusBarItem x:Name="CMSCpr" Margin="10,0" Content="Campus Card Management System 校园卡管理系统"/>
+            <StatusBarItem x:Name="CMSCpr" Margin="10,0" Content="Campus Card Management System 校园卡自助平台"/>
         </StatusBar>
         <Grid x:Name="MainGrid" Margin="0">
             <Grid.RowDefinitions>
@@ -100,7 +101,7 @@
                                 Controls:TextBoxHelper.SelectAllOnFocus="True"
                                 Controls:TextBoxHelper.ClearTextButton="True" 
                                 Controls:TextBoxHelper.UseFloatingWatermark="True" 
-                                Controls:TextBoxHelper.Watermark="Student No." Text="{Binding InputStudentNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" FontWeight="Bold"/>
+                                Controls:TextBoxHelper.Watermark="Student No." Text="{Binding InputStudentNumber, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" FontWeight="Bold"/>
                         </AdornerDecorator>
 
                     </Controls:MetroHeader>

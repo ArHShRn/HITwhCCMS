@@ -27,7 +27,7 @@ namespace HITwhCMS_Frontend
 
         private bool bExit = false;
 
-        private int dActRefreshSec = 10;
+        private int dActRefreshSec = 3;
         private int ErrorCount = 0;
 
         private DatabaseHelper db_helper = null;
@@ -180,6 +180,7 @@ namespace HITwhCMS_Frontend
                         "您是不是已经成功入驻啦呢？赶快体验一下叭！(☆▽☆)",
                         MessageDialogStyle.Affirmative, mySettings);
                     this.tbPassword.Clear();
+                    this.tbUsername.Clear();
                 };
             }
             this.Hide();
@@ -430,7 +431,7 @@ namespace HITwhCMS_Frontend
                     var s = new HomeWindow();
                     s.Closing += (o, args) =>
                     {
-                        this.Show();
+                        Application.Current.Shutdown();
                     };
                     s.Launch();
                     this.Hide();

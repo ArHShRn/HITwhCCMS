@@ -4,6 +4,10 @@
 # AES Utils
 AESKey.cs
 
+# Cluster Backs
+secp_deployment-x86_64/
+resources/
+
 # User-specific files
 *.suo
 *.user

@@ -19,9 +19,9 @@ namespace HITwhCMS.Test
             //instance.Disconnect();
             string key = "haerbingongyedaxueweihai-1604102";
             //string key = "66666666666666666666666666666666";
-            string enc = AESHelper.Encrypt(@"19980731", key);
+            string enc = AESHelper.Encrypt(@"500101199807310431", key);
             //string dec = AESHelper.Decrypt(enc, key);
-            string dec = AESHelper.Decrypt(@"uAjSpV4uk2IjiX/we6KjUA==", key);
+            string dec = AESHelper.Decrypt(enc, key);
             Console.WriteLine(enc);
             Console.WriteLine(dec);
             //StudentInfo test = new StudentInfo()

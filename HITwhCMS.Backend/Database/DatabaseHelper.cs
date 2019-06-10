@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using ArLib.Console;
 using HITwhCMS.Backend.DataTemplate;
+using HITwhCMS.Backend.Utils;
 
 namespace HITwhCMS.Backend.Database
 {
@@ -35,13 +36,13 @@ namespace HITwhCMS.Backend.Database
         }
         private string database = "";
         private readonly string port = "3306";
-        //private readonly string hostname = "database.ar-distributed.com";
-        //private readonly string user = "hitwhcms";
-        //private readonly string password = "HITwh1604102";
-
-        private readonly string hostname = "localhost";
+        private readonly string hostname = "192.168.200.132";
         private readonly string user = "root";
         private readonly string password = "Wzqhs666368";
+
+        //private readonly string hostname = "localhost";
+        //private readonly string user = "root";
+        //private readonly string password = "Wzqhs666368";
 
         /// <summary>
         /// A flag indicating if the MySQL connection is alive.
@@ -52,7 +53,7 @@ namespace HITwhCMS.Backend.Database
         /// Construct a DatabaseHelper to connect to a given database
         /// </summary>
         /// <param name="db_name">Expected database name we want to connect</param>
-        public DatabaseHelper(string db_name = "hitwhcms")
+        public DatabaseHelper(string db_name = "hitwhccms")
         {
             ARConsole.CreateConsole(false, this.GetType().ToString(), false, "[WARNING]This logger should be removed in Release version");
             Console.BackgroundColor = ConsoleColor.Black;
@@ -109,6 +110,36 @@ namespace HITwhCMS.Backend.Database
             }
         }
 
+        public bool CheckIdentity(string id, string name)
+        {
+            string id2 = AESHelper.Encrypt(id, AES_Static.AES256Key);
+            string qstring = "SELECT * FROM user_basic WHERE sIDNumber='" + id2 + "'";
+
+            try
+            {
+                if (!bConnectionAlive) throw new Exception("No live connection detected, check if there's previous error.");
+
+                MySqlCommand query = new MySqlCommand(qstring, sqlcon);
+                var reader = query.ExecuteReader();
+
+                //Read only once for getting only the first record
+                //If there's no match record, return a default StudentInfo
+                // and set exSQL = null to let app know that this isn't an exception
+                if (!reader.Read())
+                {
+                    return false;
+                }
+
+                if (name != reader.GetString("sName")) return false;
+            }
+            catch (Exception ex)
+            {
+                ARConsole.WriteLine("Exception in DatabaseHelper::RetrieveStudentInfo(): " + ex.Message, MsgLevel.Further);
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Retrieve a built student info struct from the first querying record using the name given.
         /// </summary>
@@ -117,7 +148,7 @@ namespace HITwhCMS.Backend.Database
         /// <returns>Returns a built StudentInfo which contains expected info.</returns>
         public StudentInfo RetrieveStudentInfo(string id, DataFormat dataFormat)
         {
-            string qstring = "SELECT * FROM accounts NATURAL JOIN stuinfo WHERE sStudentID='" + id + "'";
+            string qstring = "SELECT * FROM user_basic WHERE sStudentID='" + id + "'";
 
             try
             {
@@ -150,7 +181,7 @@ namespace HITwhCMS.Backend.Database
                     sPasswd = reader.GetString("sPasswd"),
                     sName = reader.GetString("sName"),
                     bRegistered = reader.GetBoolean("bRegistered"),
-                    bAdmin = reader.GetBoolean("bAdmin")
+                    bAdmin = reader.GetBoolean("eUserGroup")
                 };
 
                 //Person Introdution stage

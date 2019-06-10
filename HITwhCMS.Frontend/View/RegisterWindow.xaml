@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="HITwhCMS.Frontend.View.RegisterWindow"
+﻿<Controls:MetroWindow x:Name="MainUI" x:Class="HITwhCMS.Frontend.View.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,72 @@
         WindowStartupLocation="CenterScreen"
         GlowBrush="{DynamicResource AccentColorBrush}"
         ResizeMode="NoResize" FontFamily="Microsoft YaHei" ShowMaxRestoreButton="False" Width="800">
-    <Grid>
-        
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Button x:Name="btOpenGithub" Click="BtOpenGithub_Click" ToolTip="访问Github主页">
+                <iconPacks:PackIconModern Width="22" Height="22" Kind="SocialGithubOctocat" />
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+    <Grid x:Name="MainGrid">
+        <Image x:Name="image" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/RegisterBackground.jpg" Stretch="Fill"/>
+        <StatusBar x:Name="Copyright" Background="{DynamicResource AccentColorBrush}" Margin="0,446,0,0">
+            <StatusBarItem x:Name="HITwhCpr" Margin="10,0" Content="Harbin Institute of Technology(Weihai) 哈尔滨工业大学（威海）"/>
+            <Separator Style="{StaticResource MetroStatusBarSeparator}" />
+            <StatusBarItem x:Name="CMSCpr" Margin="10,0" Content="Campus Card Management System 校园卡自助平台"/>
+        </StatusBar>
+        <Grid x:Name="UserInterface" Height="471" Width="794" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image x:Name="HITwh_logo" HorizontalAlignment="Center" Margin="60,54,60,235" VerticalAlignment="Center" Source="../Resources/hitwh_logo.png"/>
+            <Image x:Name="Logo_Image" Stretch="Fill" IsHitTestVisible="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Source="../Resources/Avatar_Cat-512.png" Margin="98,70,546,251"/>
+            <Controls:MetroHeader x:Name="IDNumber" Margin="247,231,247,158" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <Controls:MetroHeader.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="AccountCardDetails" />
+                            <TextBlock x:Name="lbNumber"
+                                    Margin="5 0 0 0"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="Identification. 身份证号" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Controls:MetroHeader.HeaderTemplate>
+                <AdornerDecorator>
+                    <TextBox x:Name="tbIDNumber"
+                            Controls:TextBoxHelper.SelectAllOnFocus="True"
+                            Controls:TextBoxHelper.ClearTextButton="True" 
+                            Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                            Controls:TextBoxHelper.Watermark="ID Card Number." Text="{Binding InputIDNumber, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" FontWeight="Bold"/>
+                </AdornerDecorator>
+
+            </Controls:MetroHeader>
+            <Controls:MetroHeader x:Name="Name" Margin="247,306,247,107" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <Controls:MetroHeader.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="AccountCardDetails" />
+                            <TextBlock x:Name="lbNumber"
+                                    Margin="5 0 0 0"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="Name. 姓名" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Controls:MetroHeader.HeaderTemplate>
+                <AdornerDecorator>
+                    <TextBox x:Name="tbName"
+                            Controls:TextBoxHelper.SelectAllOnFocus="True"
+                            Controls:TextBoxHelper.ClearTextButton="True" 
+                            Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                            Controls:TextBoxHelper.Watermark="Name String." Text="张三" FontWeight="Bold"/>
+                </AdornerDecorator>
+
+            </Controls:MetroHeader>
+            <Button x:Name="btConfirm" Content="验证身份" Margin="247,382,407,53" Style="{DynamicResource AccentedSquareButtonStyle}" Click="BtLogin_Click" IsDefault="True" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="140"/>
+            <Button x:Name="btCancel" Content="返回" HorizontalAlignment="Center" Margin="407,382,247,53" Style="{DynamicResource SquareButtonStyle}" VerticalAlignment="Center" Width="140" Height="36" Click="BtCancel_Click"/>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>
