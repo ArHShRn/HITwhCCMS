@@ -37,6 +37,9 @@ namespace HITwhCMS.Frontend.View
         public string sStudentID = "";
         private readonly RegisterWindowViewModel registerWindowViewModel;
 
+        private List<char> listDigit = null;
+        private List<char> listDigitX = null;
+
         public RegisterWindow()
         {
             registerWindowViewModel = new RegisterWindowViewModel();
@@ -54,9 +57,16 @@ namespace HITwhCMS.Frontend.View
             //Transitioning timer
             var transTimer = new DispatcherTimer(TimeSpan.FromSeconds(dActRefreshSec), DispatcherPriority.Normal, Tick, this.Dispatcher);
 
-            //Tab0.IsEnabled = false;
-            //Tab1.IsEnabled = false;
-            //Tab2.IsEnabled = false;
+            Tab0.IsEnabled = false;
+            Tab1.IsEnabled = false;
+            Tab2.IsEnabled = false;
+
+            listDigit = new List<char>();
+            listDigitX = new List<char>();
+
+            for (int i = 0; i < 10; ++i) listDigit.Add((char)('0' + i));
+            listDigitX.AddRange(listDigit);
+            listDigitX.Add('X');
         }
 
         /// <summary>
@@ -164,6 +174,33 @@ namespace HITwhCMS.Frontend.View
                     "这条消息会出现是因为代码内部检测到了上一个操作的连接没有被成功关闭。" +
                     "\n如果您是一位用户并恰巧看到了这个消息，您可以忽略该消息，但是仍然建议您将此问题报告给系统管理员。",
                     settings: mySettings);
+            }
+
+            //Check
+            //TO-DOs: Password should not contain any special character.
+            var prev17 = tbIDNumber.Text.Substring(0, 17);
+            var last = tbIDNumber.Text.Substring(17);
+
+            bool bPrev17CtChar = false;
+            foreach(var c in prev17)
+            {
+                if(!listDigit.Contains(c))
+                {
+                    bPrev17CtChar = true;
+                    break;
+                }
+            }
+
+            bool lastValid = listDigitX.Contains(last.First());
+
+            var beValid = tbIDNumber.Text.Length == 18 && lastValid && !bPrev17CtChar;
+
+            //----------Validate input
+            if (!beValid)
+            {
+                MessageDialogResult result = await this.ShowMessageAsync("格式有误", "检查一下你输入的身份证信息哦~d=====(￣▽￣*)b",
+                    MessageDialogStyle.Affirmative, mySettings);
+                return;
             }
 
             var controller = await this.ShowProgressAsync("请稍等......", "我们正在连接到数据库以获取您的账号信息", settings: myProcessSettings);
