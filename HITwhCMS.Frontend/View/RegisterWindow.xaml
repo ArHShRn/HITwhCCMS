@@ -27,10 +27,11 @@
         <Grid.Resources>
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
         </Grid.Resources>
+        <Rectangle x:Name="TabControlBackground" Height="24" VerticalAlignment="Top" Fill="#CC000428"/>
         <TabControl x:Name="RegisterTabControl"
-                                    Controls:TabControlHelper.Underlined="SelectedTabItem"
+                                    Controls:TabControlHelper.Underlined="TabPanel"
                                     TabStripPlacement="Top" Background="{x:Null}">
-            <Controls:MetroTabItem x:Name="Tab0" Header="1.身份验证 " BorderBrush="{DynamicResource AccentColorBrush}">
+            <Controls:MetroTabItem x:Name="Tab0" Header="1.身份验证 " Controls:TabControlHelper.UnderlineSelectedBrush="{DynamicResource AccentColorBrush}" Controls:ControlsHelper.HeaderFontSize="12">
                 <Grid x:Name="Identity_Grid" HorizontalAlignment="Left" Height="427" VerticalAlignment="Top" Width="794" Margin="0,1,-6,-5">
                     <Grid x:Name="UserInterface" Height="471" Width="794" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-44,0,0">
                         <Grid.RowDefinitions>
@@ -87,20 +88,331 @@
                     </Grid>
                 </Grid>
             </Controls:MetroTabItem>
-            <Controls:MetroTabItem x:Name="Tab1" Header="2.设置密码与密保问题 ">
-                <Grid x:Name="Password_Grid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="794" Margin="0,0,-6,0">
+            <Controls:MetroTabItem x:Name="Tab1" Header="2.设置密码与密保问题 " Controls:ControlsHelper.HeaderFontSize="12">
+                <Grid x:Name="Password_Grid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="418" Width="794" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="157*"/>
-                        <ColumnDefinition Width="240*"/>
+                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btNext_Tab1" Content="下一步" Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" Margin="186,301,0,0" VerticalAlignment="Top" Width="167" Click="BtNext_Tab1_Click" Height="74" Grid.Column="1"/>
-                    <Button x:Name="btPrevious_Tab1" Content="上一步" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="139,301,0,0" VerticalAlignment="Top" Width="167" Click="BtPrevious_Tab1_Click" Height="74"/>
+                    <Rectangle x:Name="BigGridBackground" Fill="#AAFFFFFF" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btPrevious_Tab1" Content="上一步" Style="{DynamicResource SquareButtonStyle}" Margin="20,0,0,10" VerticalAlignment="Bottom" Click="BtPrevious_Tab1_Click" Height="50" Grid.Column="1" HorizontalAlignment="Left" Width="120"/>
+                    <Button x:Name="btNext_Tab1" Content="下一步" Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,10" VerticalAlignment="Bottom" Width="120" Click="BtNext_Tab1_Click" Height="50" Grid.Column="1"/>
+                    <Grid x:Name="InputGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Height="418" Width="488.615" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="16*"/>
+                        </Grid.RowDefinitions>
+                        <Controls:MetroHeader x:Name="Password" Margin="15,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="TextboxPassword" />
+                                        <TextBlock x:Name="lbPassword"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="PWD. 密码" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <AdornerDecorator>
+                                <PasswordBox x:Name="tbPassword"
+                                    Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                    Controls:TextBoxHelper.ClearTextButton="True" 
+                                    Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                    Controls:TextBoxHelper.Watermark="Your Password." Style="{StaticResource Win8MetroPasswordBox}" Password="" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                            </AdornerDecorator>
+
+                        </Controls:MetroHeader>
+                        <Controls:MetroHeader x:Name="Password_Confirm" Margin="0,50,15,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="TextboxPassword" />
+                                        <TextBlock x:Name="lbPassword_Confirm"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="PWD Confirm. 密码确认" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <AdornerDecorator>
+                                <PasswordBox x:Name="tbPassword_Confirm"
+                                    Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                    Controls:TextBoxHelper.ClearTextButton="True" 
+                                    Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                    Controls:TextBoxHelper.Watermark="Repeat Password." Style="{StaticResource Win8MetroPasswordBox}" Password="" FontWeight="Bold"/>
+                            </AdornerDecorator>
+                        </Controls:MetroHeader>
+                        <Controls:MetroHeader x:Name="Question1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,50,0,0" Width="220">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="CommentQuestion" />
+                                        <TextBlock x:Name="lbQuestion1"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="Question 1. 密保问题1" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <ComboBox x:Name="cbQues1" Width="220"
+                          Margin="0"
+                          Controls:TextBoxHelper.ClearTextButton="True"
+                          Controls:TextBoxHelper.UseFloatingWatermark="True"
+                          Controls:TextBoxHelper.Watermark="选择一个或者填写自己的问题"
+                          IsEditable="True"
+                          SelectedIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                                <ComboBox.ContextMenu>
+                                    <ContextMenu IsEnabled="False" Visibility="Collapsed" />
+                                </ComboBox.ContextMenu>
+                                <ComboBoxItem x:Name="cbitQ1I0" Content="我最喜欢的水果是什么？" />
+                                <ComboBoxItem x:Name="cbitQ1I1" Content="我最喜欢的动物是什么？" />
+                                <ComboBoxItem x:Name="cbitQ1I2" Content="我最喜欢的电影是什么？" />
+                                <ComboBoxItem x:Name="cbitQ1I3" Content="我最喜欢的游戏是什呢？" />
+                            </ComboBox>
+                        </Controls:MetroHeader>
+                        <Controls:MetroHeader x:Name="Question2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,15,0" Width="220">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="CommentQuestionOutline" />
+                                        <TextBlock x:Name="lbQuestion2"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="Question 2. 密保问题2" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <ComboBox x:Name="cbQues2" Width="220"
+                                Margin="0"
+                                Controls:TextBoxHelper.ClearTextButton="True"
+                                Controls:TextBoxHelper.UseFloatingWatermark="True"
+                                Controls:TextBoxHelper.Watermark="选择一个或者填写自己的问题"
+                                IsEditable="True"
+                                SelectedIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                                <ComboBox.ContextMenu>
+                                    <ContextMenu IsEnabled="False" Visibility="Collapsed" />
+                                </ComboBox.ContextMenu>
+                                <ComboBoxItem x:Name="cbitQ2I0" Content="我的父亲叫什么名字？" />
+                                <ComboBoxItem x:Name="cbitQ2I1" Content="我的母亲叫什么名字？" />
+                                <ComboBoxItem x:Name="cbitQ2I2" Content="我最喜欢的人的名字？" />
+                                <ComboBoxItem x:Name="cbitQ3I3" Content="我最讨厌的人的名字？" />
+                            </ComboBox>
+                        </Controls:MetroHeader>
+                        <ProgressBar x:Name="pbPasswordStrength" Width="250"
+                                         Height="15"
+                                         Margin="0,0,15,15"
+                                         Maximum="100"
+                                         Minimum="0"
+                                         Value="{Binding dPasswordStrength}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        <TextBlock x:Name="lbPasswdStrength" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Password Strength. 密码强度" VerticalAlignment="Bottom" Margin="15,0,0,15" FontSize="14"/>
+                        <TextBlock x:Name="lbSeparator" HorizontalAlignment="Center" TextWrapping="Wrap" Text="----------------------------------------------------------------------------------------" VerticalAlignment="Top" Grid.Row="1" Margin="0,-9,0,0"/>
+                        <TextBlock x:Name="labelPasswd" HorizontalAlignment="Center" Margin="27,10,26.615,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Adobe Garamond Pro Bold" FontSize="14" TextAlignment="Center"><Run Text="1. 首先请输入一个密码，这个密码将用于您在自助平台上的账号登陆"/><Run Text="；"/><LineBreak/><Run/><Run Text="在登陆本平台过后，您能够享受更多的便捷功能。"/><LineBreak/></TextBlock>
+                        <TextBlock x:Name="labelQuestion" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Adobe Garamond Pro Bold" FontSize="14" TextAlignment="Center" Grid.Row="1"><Run Text="2. 然后请选择或者自己填写两个密保问题以便于账号密码的找回"/><Run Text="；"/><LineBreak/><Run/><Run Text="请不要担心，就算您忘记了密码甚至密保，您还可以进行账号申诉！"/><LineBreak/></TextBlock>
+                        <Controls:MetroHeader x:Name="Question1_Answer" Margin="15,0,0,15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="220" Grid.Row="1">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="TextboxPassword" />
+                                        <TextBlock x:Name="lbQuestion1_Answer"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="Question 1 Ans. 问题1答案" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <AdornerDecorator>
+                                <TextBox x:Name="tbQuestion1_Answer"
+                                    Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                    Controls:TextBoxHelper.ClearTextButton="True" 
+                                    Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                    Controls:TextBoxHelper.Watermark="Your Answer." Text="" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                            </AdornerDecorator>
+
+                        </Controls:MetroHeader>
+                        <Controls:MetroHeader x:Name="Question2_Answer" Margin="0,0,15,15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="220" Grid.Row="1">
+                            <Controls:MetroHeader.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="TextboxPassword" />
+                                        <TextBlock x:Name="lbQuestion2_Answer"
+                                            Margin="5 0 0 0"
+                                            VerticalAlignment="Center"
+                                            Foreground="Black"
+                                            Text="Question 2 Ans. 问题2答案" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:MetroHeader.HeaderTemplate>
+                            <AdornerDecorator>
+                                <TextBox x:Name="tbQuestion2_Answer"
+                                    Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                    Controls:TextBoxHelper.ClearTextButton="True" 
+                                    Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                    Controls:TextBoxHelper.Watermark="Your Answer." Text="" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                            </AdornerDecorator>
+
+                        </Controls:MetroHeader>
+                        <TextBlock x:Name="labelAnswer" HorizontalAlignment="Center" Margin="34.5,0,34.115,60" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Adobe Garamond Pro Bold" FontSize="14" TextAlignment="Center" Grid.Row="1"><Run Text="3. 最后请填写您的密保答案"/><Run Text="；"/><LineBreak/><Run/><Run Text="请注意不要包含特殊符号，否则后续可能会出现不可预知的现象！"/><LineBreak/></TextBlock>
+                    </Grid>
+                    <Grid x:Name="LogoGrid" Margin="0,0,0,154" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="Logo_Image1" Stretch="Fill" IsHitTestVisible="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Source="../Resources/Avatar_Cat-512.png"/>
+                        <TextBlock x:Name="LogoText" 
+                            TextWrapping="Wrap" 
+                            TextAlignment="Center"
+                            Foreground="Black"
+                            FontSize="20" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"><Run FontSize="18" FontFamily="Segoe UI Black"/><LineBreak/><Run FontSize="18" FontFamily="Segoe UI Black" Text="Welcome To HITwh C.M.S"/><LineBreak/><Run FontSize="18" FontFamily="Segoe UI Black" Text="欢迎使用哈威校园卡管理系统"/><LineBreak/><Run FontSize="18" FontFamily="Segoe UI Black"/><Run FontSize="18" FontFamily="Segoe UI Black" Text="(❤ ω ❤)"/><LineBreak/><Run FontSize="18" FontFamily="Segoe UI Black" Text=""/></TextBlock>
+                    </Grid>
+                    <Rectangle x:Name="QuestionBackground" Stroke="{DynamicResource AccentColorBrush}" Margin="4,2,0,1"/>
+                    <TextBlock x:Name="lbExplain" Grid.Column="1" HorizontalAlignment="Center" Margin="5,264,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Adobe Garamond Pro Bold" FontSize="14" Height="94"><Run Text="请先设置您的登陆"/><Run Text="密码"/><LineBreak/><Run Text="然后请设置您的密保问题以便找回您账号的"/><Run Text="密码"/><LineBreak/><Run Text="您可以选择我们提供的密保问题"/><LineBreak/><Run Text="也可以设置自己的密保问题"/><LineBreak/><Run/></TextBlock>
                 </Grid>
             </Controls:MetroTabItem>
-            <Controls:MetroTabItem x:Name="Tab2" Header="3.设置个人资料 ">
+            <Controls:MetroTabItem x:Name="Tab2" Header="3.设置个人资料 " Controls:ControlsHelper.HeaderFontSize="12">
                 <Grid x:Name="PersonalInfo_Grid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="794" Margin="0,0,-6,0">
-                    <Button x:Name="btNext_Tab2" Content="完成" Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" Margin="500,301,0,0" VerticalAlignment="Top" Width="167" Click="BtNext_Tab2_Click" Height="74"/>
-                    <Button x:Name="btPrevious_Tab2" Content="上一步" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="139,301,0,0" VerticalAlignment="Top" Width="167" Click="BtPrevious_Tab2_Click" Height="74"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="16*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle x:Name="Right" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" Height="417" Stroke="Black" VerticalAlignment="Top" Width="489" Grid.ColumnSpan="2" Margin="304,-1,0,0"/>
+                    <Rectangle x:Name="Whole" Fill="#7FFFFFFF" Height="417" Stroke="Black" Width="794" Grid.ColumnSpan="2" Margin="-6,-12,0,0"/>
+                    <Button x:Name="btNext_Tab2" Content="完成" Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Right" Margin="0,0,10,20" VerticalAlignment="Bottom" Width="230" Click="BtNext_Tab2_Click" Height="40" Grid.Column="1"/>
+                    <Button x:Name="btPrevious_Tab2" Content="上一步" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,20" VerticalAlignment="Bottom" Width="230" Click="BtPrevious_Tab2_Click" Height="40" Grid.Column="1"/>
+                    <Grid x:Name="AvatarGrid" Margin="0,0,0,163">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="Avatar_Image" Stretch="Fill" IsHitTestVisible="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Source="../Resources/Avatar_Cat-512.png"/>
+                        <TextBlock x:Name="lbAvatar_sStudentID" 
+                            TextWrapping="Wrap" 
+                            TextAlignment="Center"
+                            Foreground="Black"
+                            FontSize="20" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="160400220" Margin="0"/>
+                        <TextBlock x:Name="lbAvatar_sName" 
+                            TextWrapping="Wrap" 
+                            TextAlignment="Center"
+                            Foreground="Black"
+                            FontSize="20" FontFamily="Segoe UI Semibold" TextDecorations="{x:Null}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="胡森" Margin="0,32,0,0"/>
+                        <Controls:TransitioningContentControl x:Name="transitioning"
+                                                      Margin="0,59,0,5"
+                                                      Transition="Custom"
+                                                      CustomVisualStatesName="SecondCustomTransition"
+                                                      Grid.Row="1" Foreground="{DynamicResource AccentColorBrush}">
+                            <Controls:TransitioningContentControl.CustomVisualStates>
+                                <VisualState x:Name="SecondCustomTransition">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                           Storyboard.TargetName="CurrentContentPresentationSite"
+                                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <SineEase />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                           Storyboard.TargetName="PreviousContentPresentationSite"
+                                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </Controls:TransitioningContentControl.CustomVisualStates>
+                        </Controls:TransitioningContentControl>
+                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,0,0,-7" TextWrapping="Wrap" Text="---------------------------------------------------------" VerticalAlignment="Bottom" Grid.Row="1" Foreground="{DynamicResource AccentColorBrush}"/>
+                        <ListView x:Name="Avatar_List" Margin="5,109,5,-147"
+                          BorderThickness="1"
+                          ItemsSource="{Binding Artists}"
+                          SelectedIndex="0"
+                          Style="{StaticResource VirtualisedMetroListView}" Grid.Row="1">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ArtistId}" Header="头像序号" Width="80" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="头像注释" Width="212" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    <Controls:MetroHeader x:Name="Nickname" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Grid.Column="1">
+                        <Controls:MetroHeader.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="RenameBox" />
+                                    <TextBlock x:Name="lbNickname"
+                                        Margin="5 0 0 0"
+                                        VerticalAlignment="Center"
+                                        Foreground="Black"
+                                        Text="Nickname. 昵称" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Controls:MetroHeader.HeaderTemplate>
+                        <AdornerDecorator>
+                            <TextBox x:Name="tbNicknameInput"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                Controls:TextBoxHelper.ClearTextButton="True" 
+                                Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                Controls:TextBoxHelper.Watermark="Your Nickname." Text="墨色黛海的缅因猫" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                        </AdornerDecorator>
+
+                    </Controls:MetroHeader>
+                    <Controls:MetroHeader x:Name="Telephone" Margin="10,73,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Grid.Column="1">
+                        <Controls:MetroHeader.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="Telegram" />
+                                    <TextBlock x:Name="lbTelephone"
+                                        Margin="5 0 0 0"
+                                        VerticalAlignment="Center"
+                                        Foreground="Black"
+                                        Text="Telephone. 手机" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Controls:MetroHeader.HeaderTemplate>
+                        <AdornerDecorator>
+                            <TextBox x:Name="tbTelephone"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                Controls:TextBoxHelper.ClearTextButton="True" 
+                                Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                Controls:TextBoxHelper.Watermark="Your Telephone." Text="17863109205" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                        </AdornerDecorator>
+
+                    </Controls:MetroHeader>
+                    <Controls:MetroHeader x:Name="Email" Margin="0,136,259,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Grid.Column="1">
+                        <Controls:MetroHeader.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Foreground="Black" VerticalAlignment="Center" Kind="Email" />
+                                    <TextBlock x:Name="lbEmail"
+                                        Margin="5 0 0 0"
+                                        VerticalAlignment="Center"
+                                        Foreground="Black"
+                                        Text="Email. 邮箱" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Controls:MetroHeader.HeaderTemplate>
+                        <AdornerDecorator>
+                            <TextBox x:Name="tbEmail"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True"
+                                Controls:TextBoxHelper.ClearTextButton="True" 
+                                Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                                Controls:TextBoxHelper.Watermark="Your Email." Text="drancickphysix@yahoo.com" FontWeight="Bold" KeyDown="TbPassword_KeyDown"/>
+                        </AdornerDecorator>
+
+                    </Controls:MetroHeader>
                 </Grid>
             </Controls:MetroTabItem>
         </TabControl>

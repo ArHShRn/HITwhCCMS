@@ -110,6 +110,36 @@ namespace HITwhCMS.Backend.Database
             }
         }
 
+        public string GetStudentNumFromID(string id)
+        {
+            string id2 = AESHelper.Encrypt(id, AES_Static.AES256Key);
+            string qstring = "SELECT * FROM user_basic WHERE sIDNumber='" + id2 + "'";
+
+
+            try
+            {
+                if (!bConnectionAlive) throw new Exception("No live connection detected, check if there's previous error.");
+
+                MySqlCommand query = new MySqlCommand(qstring, sqlcon);
+                var reader = query.ExecuteReader();
+
+                //Read only once for getting only the first record
+                //If there's no match record, return a default StudentInfo
+                // and set exSQL = null to let app know that this isn't an exception
+                if (!reader.Read())
+                {
+                    return "";
+                }
+
+                return reader.GetString("sStudentID");
+            }
+            catch (Exception ex)
+            {
+                ARConsole.WriteLine("Exception in DatabaseHelper::RetrieveStudentInfo(): " + ex.Message, MsgLevel.Further);
+                return "";
+            }
+        }
+
         public bool CheckIdentity(string id, string name)
         {
             string id2 = AESHelper.Encrypt(id, AES_Static.AES256Key);

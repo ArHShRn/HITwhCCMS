@@ -103,6 +103,7 @@ namespace HITwhCMS_Frontend
                 FontSize = 18
             };
         }
+
         /// <summary>
         /// Set initial focus to username textbox
         /// </summary>
@@ -174,13 +175,16 @@ namespace HITwhCMS_Frontend
                 registerWindow = new RegisterWindow();
                 registerWindow.Closed += async (o, args) => 
                 {
-                    registerWindow = null;
                     this.Show();
                     result = await this.ShowMessageAsync("哇哦！",
                         "您是不是已经成功入驻啦呢？赶快体验一下叭！(☆▽☆)",
                         MessageDialogStyle.Affirmative, mySettings);
+
                     this.tbPassword.Clear();
                     this.tbUsername.Clear();
+                    this.tbUsername.Text = registerWindow.sStudentID;
+
+                    registerWindow = null;
                 };
             }
             this.Hide();
@@ -433,7 +437,7 @@ namespace HITwhCMS_Frontend
                     {
                         Application.Current.Shutdown();
                     };
-                    s.Launch();
+                    s.Show();
                     this.Hide();
                 }
                 return;

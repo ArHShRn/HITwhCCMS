@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Xaml.Behaviors.Core;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -18,25 +19,23 @@ namespace HITwhCMS.Frontend.View
     /// <summary>
     /// Interaction logic for HomeWindow.xaml
     /// </summary>
-    public partial class HomeWindow : MetroWindow
+    public partial class HomeWindow
     {
         public HomeWindow()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Common method to launch a new window
-        /// </summary>
-        public void Launch()
+        public ICommand QuickLaunchBarFocusCommand => new ActionCommand(FocusQuickLaunchBar);
+
+        private void FocusQuickLaunchBar()
         {
-            Owner = Application.Current.MainWindow;
-            // only for this window, because we allow minimizing
-            if (WindowState == WindowState.Minimized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            Show();
+            QuickLaunchBar.Focus();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

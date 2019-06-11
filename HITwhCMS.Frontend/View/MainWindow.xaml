@@ -47,7 +47,7 @@
             <RowDefinition Height="444*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="image" HorizontalAlignment="Left" Margin="0,0,0,-2" VerticalAlignment="Top" Source="../Resources/RegisterBackground.jpg" Stretch="Fill" Grid.RowSpan="2" d:IsHidden="True"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Margin="0,-2,0,0" VerticalAlignment="Top" Source="../Resources/RegisterBackground.jpg" Stretch="Fill" Grid.RowSpan="2"/>
         <StatusBar x:Name="Copyright" Grid.Row="1" Background="{DynamicResource AccentColorBrush}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <StatusBarItem x:Name="HITwhCpr" Margin="10,0" Content="Harbin Institute of Technology(Weihai) 哈尔滨工业大学（威海）"/>
             <Separator Style="{StaticResource MetroStatusBarSeparator}" />
@@ -61,6 +61,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
+            <Rectangle x:Name="Background" Fill="#CAFFFFFF"/>
             <Grid x:Name="LoginGrid" Margin="10,10,10,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -1,18 +1,278 @@
 ﻿<Controls:MetroWindow x:Class="HITwhCMS.Frontend.View.HomeWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HITwhCMS.Frontend.View"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        mc:Ignorable="d"
-        Title="主页 Home"
-        Height="500"
-        WindowStartupLocation="CenterScreen"
-        GlowBrush="{DynamicResource AccentColorBrush}"
-        ResizeMode="NoResize" FontFamily="Microsoft YaHei" ShowMaxRestoreButton="False" Width="800">
-    <Grid>
-        
-    </Grid>
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:System="clr-namespace:System;assembly=mscorlib"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      x:Name="MainWindow"
+                      Title="哈小微校园卡自助平台 - 主页面"
+                      Width="1280"
+                      Height="720"
+                      Style="{DynamicResource VSWindowStyleKey}"
+                      WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Q"
+                    Command="{Binding QuickLaunchBarFocusCommand, ElementName=MainWindow}"
+                    Modifiers="Control" />
+    </Window.InputBindings>
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands ShowSeparators="False">
+            <Button Style="{StaticResource VSWindowNotificationButtonStyle}" ToolTip="1 Notification">
+                <iconPacks:PackIconEntypo Width="16"
+                                          Height="16"
+                                          Kind="Flag" />
+            </Button>
+            <TextBox Name="QuickLaunchBar"
+                     Controls:TextBoxHelper.ButtonContent="{iconPacks:Modern Magnify,
+                                                                             Width=12,
+                                                                             Height=12}"
+                     Controls:TextBoxHelper.Watermark="快速查找... (Ctrl+Q)"
+                     Style="{DynamicResource VSWindowQuickLaunchTextBoxStyle}" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <DockPanel>
+        <Menu Margin="2 0 0 0"
+              DockPanel.Dock="Top"
+              SnapsToDevicePixels="True">
+            <MenuItem Header="开始">
+                <MenuItem Header="用户管理">
+                    <MenuItem Header="修改密码" />
+                    <Separator />
+                    <MenuItem Header="管理用户" />
+                    <MenuItem Header="管理申诉请求" />
+                </MenuItem>
+                <MenuItem Header="程序">
+                    <MenuItem Header="退出程序" IsEnabled="False" />
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <TextBlock Margin="5"
+                   VerticalAlignment="Center"
+                   DockPanel.Dock="Left"
+                   Foreground="{StaticResource Foreground}">
+            <TextBlock.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </TextBlock.LayoutTransform>
+            哈小微校园卡自助平台
+        </TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <TabControl Margin="0 10 0 0" TabStripPlacement="Top">
+                <TabItem Header="开始">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0"
+                                  Margin="20"
+                                  Header="哈小微校园卡自助平台">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="25" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.ColumnSpan="3"
+                                           FontSize="30"
+                                           Foreground="{StaticResource Foreground}">
+                                    用户基本信息 - 概览
+                                </TextBlock>
+                                <TextBlock Grid.Row="1"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    您现在登录为：
+                                </TextBlock>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}"
+                                           Text="{x:Static System:Environment.UserName}" />
+                                <TextBlock Grid.Row="2"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    在线状态：
+                                </TextBlock>
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           FontSize="16"
+                                           Foreground="{StaticResource BackgroundSelected}">
+                                    在线
+                                </TextBlock>
+                                <Separator Grid.Row="3"
+                                           Grid.ColumnSpan="2"
+                                           Margin="5" />
+                                <TextBlock Grid.Row="4"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    身份证号码：
+                                </TextBlock>
+                                <TextBlock Grid.Row="4"
+                                           Grid.Column="1"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    xxxxxxxxxxxxxxxxxx
+                                </TextBlock>
+                                <TextBlock Grid.Row="5"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    密保问题状态：
+                                </TextBlock>
+                                <TextBlock Grid.Row="5"
+                                           Grid.Column="1"
+                                           FontSize="16"
+                                           Foreground="{StaticResource Foreground}">
+                                    完全
+                                </TextBlock>
+                            </Grid>
+                        </GroupBox>
+                        <Expander Grid.Row="1"
+                                  Margin="20"
+                                  ExpandDirection="Down"
+                                  Header="展开内容">
+                            <!--  some content here  -->
+                        </Expander>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="校园卡使用记录">
+                    <DockPanel>
+                        <Button Width="200"
+                                Height="30"
+                                Margin="50"
+                                DockPanel.Dock="Bottom" Click="Button_Click">
+                            添加消费记录
+                        </Button>
+                        <ListBox Margin="50" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBoxItem>
+                                <StackPanel>
+                                    <TextBlock FontSize="30" Foreground="{StaticResource Foreground}">学子餐厅一楼超市</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">消费金额： 7.5元</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">消费时间： 2019/06/05 21:30:00</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">备注： 待添加</TextBlock>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel>
+                                    <TextBlock FontSize="30" Foreground="{StaticResource Foreground}">学苑餐厅二楼</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">消费金额： 9元</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">消费时间： 2019/06/05 11:42:21</TextBlock>
+                                    <TextBlock FontSize="16" Foreground="{StaticResource Foreground}">备注： 吃了最后一个窗口的石锅蛋</TextBlock>
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="用户反馈">
+                    <Grid Margin="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="5"
+                                   FontSize="16"
+                                   Foreground="{StaticResource Foreground}">
+                            反馈类型
+                        </TextBlock>
+                        <TextBox Grid.Column="1"
+                                 Margin="5"
+                                 FontSize="16">
+                            BUG报告
+                        </TextBox>
+                        <TextBlock Grid.Row="1"
+                                   Margin="5"
+                                   FontSize="16"
+                                   Foreground="{StaticResource Foreground}">
+                            反馈标题
+                        </TextBlock>
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="1"
+                                 Margin="5"
+                                 FontSize="16" />
+                        <TextBox Grid.Row="2"
+                                 Grid.ColumnSpan="2"
+                                 Margin="5"
+                                 AcceptsReturn="True"
+                                 FontSize="16"
+                                 Text="在第一次入驻系统的时候，密码能够输入特殊字符，希望能够改善！"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" />
+                        <StackPanel Grid.Row="3"
+                                    Grid.ColumnSpan="2"
+                                    Orientation="Horizontal">
+                            <Button Width="200"
+                                    Height="30"
+                                    Margin="5">
+                                发送
+                            </Button>
+                            <Button Width="200"
+                                    Height="30"
+                                    Margin="5">
+                                保存为草稿
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <StackPanel Grid.Column="1" Margin="50 25 25 0">
+                <TextBlock Margin="0 10 0 10"
+                           FontSize="18"
+                           Foreground="{StaticResource Foreground}"
+                           Text="动作事件" />
+                <Separator Background="#11FFFFFF" />
+                <Button Margin="0 10 0 3"
+                        Content="新建校园卡消费记录..."
+                        FontSize="14"
+                        Style="{StaticResource LinkButton}" />
+                <Button Margin="0 3 0 10"
+                        Content="查看校园卡丢失信息..."
+                        FontSize="14"
+                        Style="{StaticResource LinkButton}" />
+                <Separator Background="#11FFFFFF" />
+                <TextBlock Margin="0 10 0 10"
+                           FontSize="18"
+                           Foreground="{StaticResource Foreground}"
+                           Text="最近打开的记录" />
+                <Separator Background="#11FFFFFF" />
+                <Button Margin="0 10 0 3"
+                        Content="学子餐厅一楼超市"
+                        FontSize="14"
+                        Style="{StaticResource LinkButton}" />
+                <Button Margin="0 3 0 3"
+                        Content="学院餐厅二楼"
+                        FontSize="14"
+                        Style="{StaticResource LinkButton}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+
 </Controls:MetroWindow>
